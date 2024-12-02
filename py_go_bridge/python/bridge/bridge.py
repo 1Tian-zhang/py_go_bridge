@@ -2,7 +2,7 @@ import ctypes
 import json
 import os
 from typing import Any
-from py_go_bridge.python.bridge.models import PyGoBaseInput
+from py_go_bridge.python.bridge.types import PyGoBaseInput
 
 class Bridge:
     def __init__(self, lib_path: str):

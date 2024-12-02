@@ -1,7 +1,15 @@
 package wrapper
 
+/*
+#include <stdlib.h>
+#include <stdint.h>
+
+typedef char* cstring;
+typedef int32_t cint;
+*/
+import "C"
+
 import (
-	"C"
 	"encoding/json"
 	"time"
 	"unsafe"
