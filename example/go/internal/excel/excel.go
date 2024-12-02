@@ -20,13 +20,13 @@ func ExportExcel(channelCode *C.char, host *C.char, port C.int32_t, user *C.char
 	return bridge.WrapFunc(func() (interface{}, error) {
 		// 转换参数
 		config := DBConfig{
-			Host:     C.GoString(channelCode),
+			Host:     C.GoString(host),
 			Port:     int(port),
 			User:     C.GoString(user),
 			Password: C.GoString(password),
 			Database: C.GoString(database),
 		}
-
+		fmt.Println(config)
 		// 直接调用ExportItemsTask
 		result := ExportItemsTask(C.GoString(channelCode), config, int(workerCount))
 

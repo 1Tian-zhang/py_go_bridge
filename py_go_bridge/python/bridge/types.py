@@ -138,7 +138,7 @@ class GoResponse(BaseModel):
     code: int = Field(description="状态码: 200成功,400参数错误,500内部错误")
     msg: str = Field(description="提示信息")
     data: Any = Field(description="实际数据")
-    timing: int = Field(description="执行耗时(毫秒)")
+    timing: float = Field(description="执行耗时(秒)")
     
     def is_success(self) -> bool:
         return self.status == 'succeed' and self.code == 200

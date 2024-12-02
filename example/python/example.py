@@ -12,7 +12,7 @@ def main():
         user="root",
         password="hashchat",
         database="llx",
-        worker_count=4
+        worker_count=11
     ))
     print(result)
     echo_input = EchoInput(input="hello")

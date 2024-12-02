@@ -20,7 +20,7 @@ type Response struct {
 	Code    int         `json:"code"`
 	Message string      `json:"message"`
 	Data    interface{} `json:"data"`
-	Timing  int64       `json:"timing"`
+	Timing  float64     `json:"timing"`
 }
 
 // WrapFunc 包装Go函数
@@ -42,8 +42,8 @@ func WrapFunc(fn func() (interface{}, error)) unsafe.Pointer {
 		resp.Data = result
 	}
 
-	// 设置执行时间
-	resp.Timing = time.Since(start).Milliseconds()
+	// 设置执行时间(秒)
+	resp.Timing = time.Since(start).Seconds()
 
 	// 转换为JSON
 	jsonBytes, err := json.Marshal(resp)
