@@ -3,9 +3,10 @@ package excel
 /*
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 
-typedef char* cstring;
-typedef int32_t cint;
+typedef const char* c_string;
+typedef int32_t c_int;
 */
 import "C"
 import (
@@ -15,21 +16,21 @@ import (
 )
 
 //export ExportExcel
-func ExportExcel(channelCode C.cstring, host C.cstring, port C.cint, user C.cstring, password C.cstring, database C.cstring, workerCount C.cint) unsafe.Pointer {
+func ExportExcel(channelCode *C.char, host *C.char, port C.int32_t, user *C.char, password *C.char, database *C.char, workerCount C.int32_t) unsafe.Pointer {
 	return bridge.WrapFunc(func() (interface{}, error) {
 		// 转换参数
-		config := export.DBConfig{
-			Host:     C.GoString(host),
+		config := DBConfig{
+			Host:     C.GoString(channelCode),
 			Port:     int(port),
 			User:     C.GoString(user),
 			Password: C.GoString(password),
 			Database: C.GoString(database),
 		}
 
-		// 调用原始函数
-		result := export.ExportItemsTask(C.GoString(channelCode), config, int(workerCount))
+		// 直接调用ExportItemsTask
+		result := ExportItemsTask(C.GoString(channelCode), config, int(workerCount))
 
-		// 这里可以处理错误,如果ExportItemsTask返回的result中包含错误信息
+		// 处理错误
 		if result["status"] == "error" {
 			return nil, fmt.Errorf(result["message"].(string))
 		}

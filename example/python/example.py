@@ -6,12 +6,12 @@ def main():
     bridge = Bridge("../go/bridge.so")
     
     result = bridge.export_excel(ExportExcelInput(
-        channel_code="test",
+        channel_code="cobazaar",
         host="localhost",
         port=3306,
         user="root",
         password="hashchat",
-        database="test",
+        database="llx",
         worker_count=4
     ))
     print(result)
